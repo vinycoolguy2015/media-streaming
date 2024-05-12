@@ -4,7 +4,7 @@ resource "aws_sns_topic" "topic" {
 }
 
 data "aws_iam_policy_document" "sns_topic_policy" {
-  policy_id = "${aws_sns_topic.topic.arn}/SNSS3NotificationPolicy"
+  policy_id = "arn:aws:sns:${var.region}:${var.account_id}:streaming-file-events/SNSS3NotificationPolicy"
   statement {
     sid    = "media-streaming-bucket-allow-send-messages"
     effect = "Allow"
@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       "SNS:Publish",
     ]
     resources = [
-      "${aws_sns_topic.topic.arn}",
+      "arn:aws:sns:${var.region}:${var.account_id}:streaming-file-events",
     ]
     condition {
       test     = "ArnEquals"
@@ -26,6 +26,4 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       ]
     }
   }
-
-  depends_on = [aws_sns_topic.topic, aws_s3_bucket.bucket]
 }
