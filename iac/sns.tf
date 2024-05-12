@@ -22,8 +22,10 @@ data "aws_iam_policy_document" "sns_topic_policy" {
       test     = "ArnEquals"
       variable = "aws:SourceArn"
       values = [
-        aws_s3_bucket.bucket_notification.arn
+        aws_s3_bucket.bucket.arn
       ]
     }
   }
+
+  depends_on = [aws_sns_topic.topic, aws_s3_bucket.bucket]
 }
