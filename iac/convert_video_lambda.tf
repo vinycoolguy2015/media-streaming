@@ -6,7 +6,7 @@ data "archive_file" "convert_video_lambda" {
 
 resource "aws_lambda_function" "convert_video" {
   function_name = "convert-video"
-  filename      = data.archive_file.lambda.output_path
+  filename      = data.archive_file.convert_video_lambda.output_path
   handler       = "index.handler"
   runtime       = "nodejs20.x"
   role          = aws_iam_role.convert_video_lambda.arn
