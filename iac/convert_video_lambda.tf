@@ -27,7 +27,7 @@ resource "aws_sns_topic_subscription" "topic_subscription" {
   endpoint  = aws_lambda_function.convert_video.arn
 }
 
-resource "aws_lambda_permission" "apigw_lambda" {
+resource "aws_lambda_permission" "sns_lambda" {
   statement_id  = "AllowExecutionFromSNS"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.convert_video.arn
