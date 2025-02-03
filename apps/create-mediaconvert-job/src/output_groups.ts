@@ -104,7 +104,7 @@ export const hls = (bucketDestination: string): OutputGroup => ({
       SegmentLength: 10, // 10s length
       TimedMetadataId3Period: 10,
       CaptionLanguageSetting: 'OMIT',
-      Destination: bucketDestination,
+      Destination: `s3://${bucketDestination}`,
       TimedMetadataId3Frame: 'PRIV',
       CodecSpecification: 'RFC_4281',
       OutputSelection: 'MANIFESTS_AND_SEGMENTS',
@@ -208,7 +208,7 @@ export const dash = (bucketDestination: string): OutputGroup => ({
     DashIsoGroupSettings: {
       SegmentLength: 10, // 10s length
       FragmentLength: 2,
-      Destination: bucketDestination,
+      Destination: `s3://${bucketDestination}`,
     },
   },
 });
