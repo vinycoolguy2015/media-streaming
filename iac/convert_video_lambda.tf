@@ -12,7 +12,7 @@ resource "aws_lambda_function" "convert_video" {
   role          = aws_iam_role.convert_video_lambda.arn
   environment {
     variables = {
-      S3_BUCKET_DESTINATION = "s3://${aws_s3_bucket.bucket.bucket}/${aws_s3_object.encoded.key}/"
+      S3_BUCKET_DESTINATION = "s3://${aws_s3_bucket.bucket.bucket}/${aws_s3_object.encoded.key}"
       MEDIA_CONVERT_ROLE    = aws_iam_role.media_convert.arn
       MEDIA_CONVERT_QUEUE   = data.aws_media_convert_queue.default.name
     }
