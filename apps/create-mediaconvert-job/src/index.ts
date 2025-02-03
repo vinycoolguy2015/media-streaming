@@ -32,6 +32,8 @@ export const handler: Handler<
 
   const fileInput = `${bucketInput}${key}`;
 
+  console.log('Starting convert job for file input %s', fileInput);
+
   const createJobCommand = new CreateJobCommand({
     Role: mediaConvertRole,
     Queue: streamingQueue,
@@ -72,4 +74,6 @@ export const handler: Handler<
   } catch (error: any) {
     console.error('Failed creating media converter job', error);
   }
+
+  console.log('Finished %s', fileInput);
 };
