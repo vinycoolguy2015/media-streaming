@@ -30,7 +30,7 @@ export const handler: Handler<
   const bucketInput = event.detail.bucket.name;
   const key = event.detail.object.key;
 
-  const fileInput = `${bucketInput}${key}`;
+  const fileInput = `${bucketInput}/${key}`;
 
   console.log('Starting convert job for file input %s', fileInput);
 
