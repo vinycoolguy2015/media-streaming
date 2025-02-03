@@ -24,4 +24,12 @@ data "aws_iam_policy_document" "convert_video_lambda_role_policies" {
 
     resources = ["arn:aws:logs:*:*:*"]
   }
+
+  statement {
+    effect = "Allow"
+
+    actions = ["iam:PassRole"]
+
+    resources = [aws_iam_role.media_convert.arn]
+  }
 }
