@@ -27,7 +27,7 @@ export const handler: Handler<
     S3ObjectCreatedNotificationEventDetail
   >
 ): Promise<void> => {
-  const bucketInput = event.detail.bucket;
+  const bucketInput = event.detail.bucket.name;
   const key = event.detail.object.key;
 
   const fileInput = `${bucketInput}${key}`;
