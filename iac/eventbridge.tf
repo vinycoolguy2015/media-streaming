@@ -13,7 +13,7 @@ resource "aws_cloudwatch_event_rule" "new_media" {
     detail-type = ["Object Created"],
     detail = {
       bucket = {
-        name = ["${aws_s3_bucket.buckect.bucket}"]
+        name = ["${aws_s3_bucket.bucket.bucket}"]
       },
       object = {
         key = [{ "prefix" : "raw/" }]

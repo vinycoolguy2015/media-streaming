@@ -25,7 +25,7 @@ resource "aws_iam_role_policy" "convert_video_lambda_policies" {
 resource "aws_lambda_permission" "eventbridge" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.convert_video.function_name
-  source_arn    = aws_cloudwatch_event_rule.s3_createobject.arn
+  source_arn    = aws_cloudwatch_event_rule.new_media.arn
   principal     = "events.amazonaws.com"
 }
 
