@@ -18,7 +18,7 @@ resource "aws_iam_role" "convert_video_lambda" {
 }
 
 resource "aws_iam_role_policy" "convert_video_lambda_policies" {
-  role   = aws_iam_role.convert_video_lambda.arn
+  role   = aws_iam_role.convert_video_lambda.name
   policy = data.aws_iam_policy_document.convert_video_lambda_role_policies.json
 }
 
