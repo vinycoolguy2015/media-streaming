@@ -1,6 +1,6 @@
 data "archive_file" "convert_video_lambda" {
   type        = "zip"
-  source_file = "./lambda_init_code/index.mjs"
+  source_dir  = "lambda_init_code"
   output_path = "convert_video_lambda_function_payload.zip"
 }
 
@@ -15,22 +15,17 @@ resource "aws_lambda_function" "convert_video" {
 resource "aws_iam_role" "convert_video_lambda" {
   name               = "convert-video-lambda-role"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_role.json
-  inline_policy {
-    name   = "DefaultPolicy"
-    policy = data.aws_iam_policy_document.convert_video_lambda_role_policies.json
-  }
 }
 
-resource "aws_sns_topic_subscription" "topic_subscription" {
-  topic_arn = aws_sns_topic.topic.arn
-  protocol  = "lambda"
-  endpoint  = aws_lambda_function.convert_video.arn
+resource "aws_iam_role_policy" "convert_video_lambda_policies" {
+  role   = aws_iam_role.convert_video_lambda.arn
+  policy = data.aws_iam_policy_document.convert_video_lambda_role_policies.json
 }
 
-resource "aws_lambda_permission" "sns_lambda" {
-  statement_id  = "AllowExecutionFromSNS"
+resource "aws_lambda_permission" "eventbridge" {
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.convert_video.arn
-  principal     = "sns.amazonaws.com"
-  source_arn    = aws_sns_topic.topic.arn
+  function_name = aws_lambda_function.convert_video.function_name
+  source_arn    = aws_cloudwatch_event_rule.s3_createobject.arn
+  principal     = "events.amazonaws.com"
 }
+
