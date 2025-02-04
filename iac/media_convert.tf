@@ -27,12 +27,12 @@ data "aws_iam_policy_document" "media_convert_access_s3" {
   statement {
     effect    = "Allow"
     actions   = ["s3:PutObject"]
-    resources = [aws_s3_object.encoded.arn]
+    resources = ["${aws_s3_object.encoded.arn}*"]
   }
 
   statement {
     effect    = "Allow"
     actions   = ["s3:GetObject"]
-    resources = [aws_s3_object.raw.arn]
+    resources = ["${aws_s3_object.raw.arn}*"]
   }
 }
