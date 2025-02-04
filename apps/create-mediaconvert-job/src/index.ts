@@ -37,9 +37,9 @@ export const handler: Handler<
   const createJobCommand = new CreateJobCommand({
     Role: mediaConvertRole,
     Queue: streamingQueue,
-    AccelerationSettings: {
-      Mode: 'PREFERRED',
-    },
+    // AccelerationSettings: {
+    //   Mode: 'PREFERRED',
+    // },
     StatusUpdateInterval: 'SECONDS_60',
     Settings: {
       OutputGroups: [hls(s3BucketDestination), dash(s3BucketDestination)],
