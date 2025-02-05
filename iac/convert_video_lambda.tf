@@ -68,7 +68,10 @@ data "aws_iam_policy_document" "convert_video_lambda_role_policies" {
 
     actions = ["mediaconvert:CreateJob"]
 
-    resources = [data.aws_media_convert_queue.default.arn]
+    resources = [
+      data.aws_media_convert_queue.default.arn,
+      "arn:aws:mediaconvert:*:*:presets/*"
+    ]
   }
 }
 
