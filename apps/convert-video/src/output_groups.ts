@@ -7,7 +7,8 @@ export const hls = (bucketDestination: string): OutputGroup => ({
     HlsGroupSettings: {
       SegmentLength: 10,
       MinSegmentLength: 0,
-      Destination: `s3://${bucketDestination}/hls`,
+      // Destination: `s3://${bucketDestination}/hls/`,
+      Destination: `s3://${bucketDestination}`,
     },
   },
   Outputs: [
@@ -25,7 +26,7 @@ export const dash = (bucketDestination: string): OutputGroup => ({
     DashIsoGroupSettings: {
       SegmentLength: 30,
       FragmentLength: 2,
-      Destination: `s3://${bucketDestination}/dash`,
+      Destination: `s3://${bucketDestination}/dash/`,
     },
   },
   Outputs: [
