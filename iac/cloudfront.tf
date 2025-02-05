@@ -12,7 +12,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.bucket.bucket
+    domain_name              = aws_s3_bucket.bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id                = local.origin_id
   }
