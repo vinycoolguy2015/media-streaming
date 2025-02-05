@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - apps/create-mediaconvert-job/**/*
+      - apps/convert-video/**/*
 
 defaults:
   run:
-    working-directory: apps/create-mediaconvert-job/
+    working-directory: apps/convert-video/
 
 jobs:
   deploy:

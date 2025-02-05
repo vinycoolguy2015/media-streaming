@@ -8,7 +8,7 @@ resource "aws_lambda_function" "convert_video" {
   function_name = "convert-video"
   filename      = data.archive_file.convert_video_lambda.output_path
   handler       = "index.handler"
-  runtime       = "nodejs20.x"
+  runtime       = "nodejs22.x"
   role          = aws_iam_role.convert_video_lambda.arn
   environment {
     variables = {
@@ -27,6 +27,49 @@ resource "aws_iam_role" "convert_video_lambda" {
 resource "aws_iam_role_policy" "convert_video_lambda_policies" {
   role   = aws_iam_role.convert_video_lambda.name
   policy = data.aws_iam_policy_document.convert_video_lambda_role_policies.json
+}
+
+data "aws_iam_policy_document" "lambda_assume_role" {
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+data "aws_iam_policy_document" "convert_video_lambda_role_policies" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+
+    resources = ["arn:aws:logs:*:*:*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = ["iam:PassRole"]
+
+    resources = [aws_iam_role.media_convert.arn]
+  }
+  statement {
+    effect = "Allow"
+
+    actions = ["mediaconvert:CreateJob"]
+
+    resources = [data.aws_media_convert_queue.default.arn]
+  }
 }
 
 resource "aws_lambda_permission" "eventbridge" {

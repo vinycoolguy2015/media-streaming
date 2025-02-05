@@ -1,5 +1,5 @@
 {
-  "name": "create-short-url",
+  "name": "convert-video",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -13,12 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-mediaconvert": "^3.574.0",
-    "typescript": "^5.4.3"
+    "@aws-sdk/client-mediaconvert": "^3.574.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.130",
     "@types/node": "^20.10.4",
-    "copyfiles": "^2.4.1"
+    "copyfiles": "^2.4.1",
+    "typescript": "^5.4.3"
   }
 }

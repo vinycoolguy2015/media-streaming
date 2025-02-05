@@ -42,7 +42,8 @@ export const handler: Handler<
     },
     StatusUpdateInterval: 'SECONDS_60',
     Settings: {
-      OutputGroups: [hls(s3BucketDestination), dash(s3BucketDestination)],
+      OutputGroups: [hls(s3BucketDestination)],
+      // OutputGroups: [hls(s3BucketDestination), dash(s3BucketDestination)],
       TimecodeConfig: {
         Source: 'ZEROBASED',
       },
