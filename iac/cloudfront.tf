@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "My React Website Distribution"
+  comment             = "My MediaStreaming Distribution"
   default_root_object = aws_s3_object.encoded.key
 
   # logging_config {
