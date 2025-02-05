@@ -88,6 +88,6 @@ resource "aws_cloudfront_cache_policy" "website" {
 # }
 
 # If CORS is needed, add this
-# data "aws_cloudfront_response_headers_policy" "cors_response_headers_policy" {
-#   name = "CORS-With-Preflight"
-# }
+data "aws_cloudfront_response_headers_policy" "cors_response_headers_policy" {
+  name = "CORS-With-Preflight"
+}
