@@ -29,8 +29,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   # }
 
   default_cache_behavior {
-    allowed_methods  = ["GET"]
-    cached_methods   = ["GET"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.origin_id
 
     cache_policy_id = aws_cloudfront_cache_policy.website.id
