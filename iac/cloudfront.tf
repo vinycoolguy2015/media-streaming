@@ -15,13 +15,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     domain_name              = aws_s3_bucket.bucket.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
     origin_id                = local.origin_id
-    origin_path              = aws_s3_object.encoded.key
+    origin_path              = "/${trimsuffix(aws_s3_object.encoded.key, "/")}"
   }
 
-  enabled             = true
-  is_ipv6_enabled     = true
-  comment             = "My MediaStreaming Distribution"
-  default_root_object = aws_s3_object.encoded.key
+  enabled         = true
+  is_ipv6_enabled = true
+  comment         = "My MediaStreaming Distribution"
 
   # logging_config {
   #   include_cookies = false
