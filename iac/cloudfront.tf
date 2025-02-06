@@ -36,6 +36,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     cache_policy_id = aws_cloudfront_cache_policy.website.id
 
     viewer_protocol_policy = "redirect-to-https"
+
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.CORS.id
   }
 
   price_class = "PriceClass_100"
@@ -88,6 +90,21 @@ resource "aws_cloudfront_cache_policy" "website" {
 # }
 
 # If CORS is needed, add this
-data "aws_cloudfront_response_headers_policy" "cors_response_headers_policy" {
-  name = "CORS-With-Preflight"
+resource "aws_cloudfront_response_headers_policy" "CORS" {
+  name = "CORS"
+  cors_config {
+    access_control_allow_credentials = true
+    origin_override                  = true
+    access_control_allow_headers {
+      items = ["*"]
+    }
+
+    access_control_allow_methods {
+      items = ["GET"]
+    }
+
+    access_control_allow_origins {
+      items = ["*"]
+    }
+  }
 }
