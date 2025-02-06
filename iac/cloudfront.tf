@@ -96,7 +96,7 @@ resource "aws_cloudfront_response_headers_policy" "CORS" {
     access_control_allow_credentials = true
     origin_override                  = true
     access_control_allow_headers {
-      items = ["*"]
+      items = ["Content-Type", "Authorization"]
     }
 
     access_control_allow_methods {
@@ -104,7 +104,7 @@ resource "aws_cloudfront_response_headers_policy" "CORS" {
     }
 
     access_control_allow_origins {
-      items = ["*"]
+      items = ["http://localhost:3000", "https://localhost:3000"]
     }
   }
 }
