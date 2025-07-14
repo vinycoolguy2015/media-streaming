@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "terraform-medium-api-notification"
+    bucket = "dev-params-tfstate"
     key    = "streaming-service.tfstate"
   }
 }
